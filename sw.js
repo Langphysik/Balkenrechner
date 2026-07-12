@@ -1,9 +1,9 @@
 /* Service Worker: App vollständig offline verfügbar halten */
-const CACHE = "balken-rechner-v1";
+const CACHE = "balken-rechner-v2";
 const FILES = [
   "./",
   "./index.html",
-  "./manifest.webmanifest",
+  "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",
   "./icons/icon-maskable-512.png"
