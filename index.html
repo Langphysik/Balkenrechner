@@ -51,10 +51,10 @@
   .toggle{display:flex; align-items:center; gap:9px; font-size:13px; font-weight:600; padding:2px 0 10px; cursor:pointer; user-select:none}
   .toggle input{width:16px; height:16px; accent-color:var(--blue); cursor:pointer; flex:none}
   .actions{display:flex; gap:9px; padding:2px 0 10px; flex-wrap:wrap}
-  button.btn{font:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--card);
-    border:1px solid var(--line); border-radius:9px; padding:8px 13px; cursor:pointer}
-  button.btn:hover{background:#E4EAF1}
-  button.btn:focus-visible{outline:2px solid var(--bluedk); outline-offset:2px}
+  .btn{font:inherit; font-size:13px; font-weight:600; color:var(--ink); background:var(--card);
+    border:1px solid var(--line); border-radius:9px; padding:8px 13px; cursor:pointer; display:inline-block}
+  .btn:hover{background:#E4EAF1}
+  .btn:focus-visible{outline:2px solid var(--bluedk); outline-offset:2px}
 
   .stage{background:var(--bg); border-radius:14px; padding:12px; box-shadow:0 6px 20px rgba(30,41,59,.08)}
   svg{display:block; width:100%; height:auto}
@@ -87,14 +87,99 @@
     input[type=range]{height:38px}                 /* größere Trefferfläche */
     input[type=range]::-webkit-slider-thumb{transform:scale(1.25)}
     select{padding:10px 8px; font-size:14px}
-    button.btn{padding:11px 14px; font-size:14px}
+    .btn{padding:11px 14px; font-size:14px}
     .card{padding:14px}
     .chip{font-size:12.5px; padding:8px 10px}
     .ctrl{margin-bottom:16px}
+    .progWrap{grid-template-columns:1fr}
+    .solRow select{width:100%}
+    .formulas{grid-template-columns:1fr}
   }
   @media (max-width:920px) and (display-mode:standalone){
     header.no-print{padding-top:env(safe-area-inset-top)}
   }
+  /* Dropdown-Bereiche: Aufgaben, Fortschritt, Meine Lösungen */
+  details.acc{background:var(--bg); border-radius:14px; margin-top:18px; box-shadow:0 6px 20px rgba(30,41,59,.08); overflow:hidden}
+  details.acc>summary{list-style:none; cursor:pointer; padding:16px 18px; display:flex;
+    align-items:center; justify-content:space-between; gap:10px}
+  details.acc>summary::-webkit-details-marker{display:none}
+  details.acc>summary .sTitle{display:flex; align-items:center; gap:10px; font-size:16px; font-weight:800}
+  details.acc>summary .cnt{font-size:11.5px; font-weight:700; color:var(--mut); background:var(--card);
+    padding:3px 9px; border-radius:999px}
+  details.acc>summary .chev{color:var(--mut); font-size:13px; transition:transform .18s; flex:none}
+  details.acc[open]>summary .chev{transform:rotate(90deg)}
+  details.acc>summary:focus-visible{outline:2px solid var(--bluedk); outline-offset:-2px}
+  details.acc>.body{padding:2px 18px 20px; border-top:1px solid var(--line)}
+
+  .taskbar{display:flex; gap:8px; flex-wrap:wrap; margin:14px 0 4px}
+  .fbtn{font:inherit; font-size:12.5px; font-weight:700; padding:6px 12px; border-radius:999px;
+    border:1px solid var(--line); background:var(--card2); color:var(--mut); cursor:pointer}
+  .fbtn.on{background:var(--ink); color:#fff; border-color:var(--ink)}
+  .tasks{display:flex; flex-direction:column; gap:12px; margin-top:14px}
+  .task{border:1px solid var(--line); border-radius:12px; padding:13px 15px; background:var(--card2)}
+  .task.done{background:var(--greenbg); border-color:#BEE3D3}
+  .task .thead{display:flex; justify-content:space-between; align-items:flex-start; gap:10px; flex-wrap:wrap}
+  .task .ttitle{font-weight:700; font-size:14px; margin:0}
+  .task .ttitle span{color:var(--mut); font-weight:600; margin-right:6px}
+  .badges{display:flex; gap:6px; flex-wrap:wrap}
+  .badge{font-size:10.5px; font-weight:800; letter-spacing:.3px; text-transform:uppercase;
+    padding:3px 8px; border-radius:999px; white-space:nowrap}
+  .badge.d1{background:var(--greenbg); color:var(--green)}
+  .badge.d2{background:var(--amberbg); color:var(--amber)}
+  .badge.d3{background:var(--redbg); color:var(--reddk)}
+  .badge.tsolve{background:#E0E7FF; color:#3730A3}
+  .badge.tcheck{background:#F1F5F9; color:var(--mut)}
+  .task p.ttext{font-size:13px; margin:9px 0 10px; color:var(--ink)}
+  .task .tfoot{display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap}
+  .tlabel{display:flex; align-items:center; gap:7px; font-size:12.5px; font-weight:700; cursor:pointer; user-select:none}
+  .tlabel input{width:15px; height:15px; accent-color:var(--green); cursor:pointer}
+
+  .progWrap{display:grid; grid-template-columns:150px 1fr; gap:22px; align-items:center; margin-top:14px}
+  .progWrap svg{display:block}
+  .pbars{display:flex; flex-direction:column; gap:12px}
+  .pbar .pl{display:flex; justify-content:space-between; font-size:12.5px; font-weight:700; margin-bottom:4px}
+  .pbar .ptrack{height:10px; border-radius:999px; background:var(--card); overflow:hidden}
+  .pbar .pfill{height:100%; border-radius:999px}
+  .pgrid{display:flex; flex-wrap:wrap; gap:7px; margin-top:18px}
+  .pdot{width:26px; height:26px; border-radius:8px; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; cursor:help}
+
+  .solRow{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:14px 0 0}
+  .solRow select{width:auto; min-width:260px}
+  .uploadZone{display:flex; gap:9px; flex-wrap:wrap; margin:12px 0}
+  .solAnswer{margin-top:18px; padding-top:14px; border-top:1px solid var(--line)}
+  .solAnswer h4{margin:0 0 10px; font-size:13px; font-weight:800}
+  .solAnswer.locked{background:var(--card2); border:1px dashed var(--line); border-radius:10px;
+    padding:12px 14px; margin-top:18px}
+  .solAnswer.locked p{color:var(--mut); font-style:italic; font-size:13px; margin:0}
+
+  .noteBox{margin-top:11px}
+  .noteBox label{display:block; font-size:11px; font-weight:700; color:var(--mut); margin-bottom:4px;
+    text-transform:uppercase; letter-spacing:.4px}
+  .noteArea{width:100%; min-height:60px; font:inherit; font-size:13px; padding:8px 10px;
+    border:1px solid var(--line); border-radius:8px; resize:vertical; background:#fff; color:var(--ink)}
+  .noteArea:focus-visible{outline:2px solid var(--bluedk); outline-offset:1px}
+
+  .progActions{display:flex; gap:9px; flex-wrap:wrap; margin:14px 0 4px}
+
+  .formulas{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:14px}
+  .fcard{background:var(--card2); border:1px solid var(--line); border-radius:10px; padding:12px 14px}
+  .fcard h4{margin:0 0 7px; font-size:12.5px; font-weight:800}
+  .fcard p{margin:0 0 5px; font-size:13px}
+  .fcard p.fhint{color:var(--mut); font-size:12px; margin-bottom:0}
+  .gallery{display:flex; flex-wrap:wrap; gap:10px; margin-top:12px}
+  .gitem{position:relative; width:96px}
+  .gitem img,.gitem .gfile{width:96px; height:96px; object-fit:cover; border-radius:10px;
+    border:1px solid var(--line); display:block; background:var(--card)}
+  .gitem .gfile{display:flex; align-items:center; justify-content:center; font-size:11px; color:var(--mut);
+    text-align:center; padding:6px; text-decoration:none}
+  .gitem .gdel{position:absolute; top:-6px; right:-6px; width:22px; height:22px; border-radius:999px;
+    border:1px solid var(--line); background:#fff; color:var(--reddk); font-size:13px; font-weight:800;
+    cursor:pointer; line-height:1; display:flex; align-items:center; justify-content:center; padding:0}
+  .gitem .gname{font-size:10px; color:var(--mut); margin-top:4px; text-align:center; overflow:hidden;
+    text-overflow:ellipsis; white-space:nowrap}
+  .empty{color:var(--mut); font-size:13px; font-style:italic}
+
   #sheetWrap{display:none}
   @media print{
     body.psheet .wrap{display:none !important}
@@ -265,6 +350,98 @@
     <div class="chips" id="chips"></div>
     <div class="chips" id="ext" style="margin-top:10px"></div>
   </section>
+
+  <details class="acc no-print" id="accTasks">
+    <summary><span class="sTitle">Aufgaben <span class="cnt" id="taskCount">0/20</span></span><span class="chev">▸</span></summary>
+    <div class="body">
+      <p class="note">20 Übungsaufgaben zum Balkenrechner – Fachoberschule Technik, 12. Klasse, Technologie. Bei „Rechner zum Lösen” hilft dir der Rechner beim Ermitteln der Ergebnisse, bei „Rechner zur Kontrolle” rechnest du zuerst von Hand und überprüfst dein Ergebnis anschließend im Rechner.</p>
+      <div class="taskbar">
+        <button class="btn" type="button" id="randomTaskBtn">Zufallsaufgabe generieren</button>
+      </div>
+      <p class="note" style="margin-top:2px">Erzeugt ein neues, zufälliges System zum zusätzlichen Üben – gehört zu keiner festen Aufgabe, kontrolliere dein Ergebnis direkt im Rechner.</p>
+      <div class="taskbar" id="diffFilter">
+        <button class="fbtn on" type="button" data-d="0">Alle</button>
+        <button class="fbtn" type="button" data-d="1">Leicht</button>
+        <button class="fbtn" type="button" data-d="2">Mittel</button>
+        <button class="fbtn" type="button" data-d="3">Schwer</button>
+      </div>
+      <div class="taskbar" id="typeFilter">
+        <button class="fbtn on" type="button" data-t="alle">Alle Typen</button>
+        <button class="fbtn" type="button" data-t="solve">Rechner zum Lösen</button>
+        <button class="fbtn" type="button" data-t="check">Rechner zur Kontrolle</button>
+      </div>
+      <div class="tasks" id="taskList"></div>
+    </div>
+  </details>
+
+  <details class="acc no-print" id="accFormulas">
+    <summary><span class="sTitle">Formelsammlung</span><span class="chev">▸</span></summary>
+    <div class="body">
+      <p class="note">Kurzübersicht der wichtigsten Zusammenhänge – ersetzt nicht das Skript, hilft aber als Spickzettel bei den Aufgaben.</p>
+      <div class="formulas">
+        <div class="fcard">
+          <h4>Gleichgewicht am ebenen Balken</h4>
+          <p>ΣF<sub>x</sub> = 0 &nbsp;·&nbsp; ΣF<sub>y</sub> = 0 &nbsp;·&nbsp; ΣM<sub>(beliebiger Punkt)</sub> = 0</p>
+          <p class="fhint">Drei Gleichungen → drei unbekannte Auflagerreaktionen bestimmbar (statisch bestimmtes System).</p>
+        </div>
+        <div class="fcard">
+          <h4>Auflagerreaktionen</h4>
+          <p><b>Festlager:</b> 2 Unbekannte (waagrecht + senkrecht) &nbsp;·&nbsp; <b>Loslager:</b> 1 Unbekannte (senkrecht zur Gleitrichtung)</p>
+          <p class="fhint">Anzahl Unbekannte r = 3 → statisch bestimmt · r &gt; 3 → statisch unbestimmt.</p>
+        </div>
+        <div class="fcard">
+          <h4>Streckenlast → Resultierende</h4>
+          <p>R = q · l</p>
+          <p class="fhint">Angriffspunkt in der Mitte der Streckenlast (bei konstantem q).</p>
+        </div>
+        <div class="fcard">
+          <h4>Hebelgesetz</h4>
+          <p>ΣM<sub>A</sub> = 0: &nbsp; F · a = B · l &nbsp;→&nbsp; B = F·a / l &nbsp;·&nbsp; A = F − B</p>
+          <p class="fhint">a = Abstand der Kraft von A, l = Auflagerabstand.</p>
+        </div>
+        <div class="fcard">
+          <h4>Kraftzerlegung am geneigten Balken</h4>
+          <p>F<sub>∥</sub> = F · cos φ &nbsp;&nbsp; F<sub>⊥</sub> = F · sin φ</p>
+          <p class="fhint">φ = Winkel zwischen Kraft und Balkenachse; F<sub>∥</sub> wirkt in Richtung der Normalkraft, F<sub>⊥</sub> in Richtung der Querkraft.</p>
+        </div>
+        <div class="fcard">
+          <h4>Schnittgrößen N, Q, M</h4>
+          <p>N: Normalkraft (Zug/Druck) &nbsp;·&nbsp; Q: Querkraft &nbsp;·&nbsp; M: Biegemoment</p>
+          <p class="fhint">dQ/dx = −q(x) &nbsp;·&nbsp; dM/dx = Q(x) → M ist extremal, wo Q = 0 ist.</p>
+        </div>
+        <div class="fcard">
+          <h4>Statische Bestimmtheit</h4>
+          <p>f = r − 3 &nbsp; (r = Anzahl Auflagerreaktionen, eben, ohne Gelenke)</p>
+          <p class="fhint">f = 0: statisch bestimmt · f &gt; 0: f-fach statisch unbestimmt · f &lt; 0: kinematisch verschieblich.</p>
+        </div>
+      </div>
+    </div>
+  </details>
+
+  <details class="acc no-print" id="accProgress">
+    <summary><span class="sTitle">Fortschritt</span><span class="chev">▸</span></summary>
+    <div class="body">
+      <div class="progActions">
+        <button class="btn" type="button" id="exportProgress">Fortschritt exportieren</button>
+        <label class="btn" for="importProgress">Fortschritt importieren<input type="file" id="importProgress" accept="application/json,.json" hidden></label>
+      </div>
+      <div id="progressBody"></div>
+    </div>
+  </details>
+
+  <details class="acc no-print" id="accSolutions">
+    <summary><span class="sTitle">Meine Lösungen</span><span class="chev">▸</span></summary>
+    <div class="body">
+      <p class="note">Fotografiere deine handschriftliche Lösung oder lade eine Datei hoch – sortiert nach Aufgabe. Die Dateien werden nur lokal in diesem Browser gespeichert, nicht auf einem Server. Sobald du ein Foto zu einer Aufgabe hochgeladen hast, schaltet sich darunter die Musterlösung frei.</p>
+      <div class="solRow"><select id="solTask"></select></div>
+      <div class="uploadZone">
+        <label class="btn" for="solPhoto">Foto aufnehmen<input type="file" id="solPhoto" accept="image/*" capture="environment" hidden></label>
+        <label class="btn" for="solFile">Datei hochladen<input type="file" id="solFile" accept="image/*,.pdf,application/pdf" multiple hidden></label>
+      </div>
+      <div class="gallery" id="solGallery"></div>
+      <div class="solAnswer" id="solAnswer"></div>
+    </div>
+  </details>
 
   <footer class="foot no-print">Rechenmodell: ebenes Stabwerk (Normalkraft + Biegung), Auflagerkräfte aus dem Gleichgewicht bzw. — bei statisch unbestimmten Systemen — aus der elastischen Lösung.</footer>
 </div>
@@ -971,6 +1148,393 @@ update();
 /* Offline-Betrieb */
 if("serviceWorker" in navigator)
   window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}));
+
+/* ================= Aufgaben ================= */
+const TDEF={alpha:15,span:10,ovlL:2,ovlR:2,nSup:2,sC:7,tA:"fest",tB:"los",tC:"los",nF:2,
+  F1mag:100,F1pos:10,F1ang:120,F2mag:60,F2pos:6,F2ang:90,F3mag:40,F3pos:12,F3ang:90,
+  q:5,qs:0,qLen:6};
+
+const TASKS=[
+ {id:1,diff:1,typ:"check",topic:"Auflagerreaktionen",
+  title:"Einfeldträger mit mittiger Einzellast",
+  text:"Ein waagrechter Balken der Länge L = 10 m ist bei A (x = 0, Festlager) und B (x = 10 m, Loslager) gelagert. In Balkenmitte (x = 5 m) wirkt eine senkrechte Einzelkraft F = 100 kN. Berechne von Hand die Auflagerkräfte A und B über die Gleichgewichtsbedingungen (ΣM_A = 0, ΣF_v = 0). Lade danach die Werte in den Rechner und kontrolliere dein Ergebnis.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:100,F1pos:5,F1ang:90,q:0}},
+ {id:2,diff:1,typ:"check",topic:"Auflagerreaktionen",
+  title:"Außermittige Einzellast – Hebelgesetz",
+  text:"Balken der Länge L = 8 m, Auflager A (x = 0) und B (x = 8 m). Eine Kraft F = 80 kN wirkt senkrecht bei x = 3 m. Berechne die Auflagerkräfte von Hand mit dem Hebelgesetz und überprüfe dein Ergebnis mit dem Rechner.",
+  preset:{ovlL:0,span:8,ovlR:0,nF:1,F1mag:80,F1pos:3,F1ang:90,q:0}},
+ {id:3,diff:1,typ:"solve",topic:"Auflagerreaktionen",
+  title:"Kraftposition verschieben – Auflagerkräfte beobachten",
+  text:"Lade das Ausgangssystem (Balken 10 m, F = 100 kN) in den Rechner. Verschiebe die Kraft mit dem Regler „Position” nacheinander auf x = 2 m, 5 m und 8 m. Notiere jeweils die Auflagerkräfte A und B. Beschreibe den Zusammenhang zwischen Kraftposition und Auflagerkräften.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:100,F1pos:5,F1ang:90,q:0}},
+ {id:4,diff:1,typ:"solve",topic:"Schnittgrößen",
+  title:"Momentenverlauf ablesen und selbst zeichnen",
+  text:"Lade das Ausgangssystem (Balken 10 m, F = 100 kN bei x = 5 m). Drucke die „Schülerversion – Momente zeichnen” aus und zeichne den Momentenverlauf von Hand in das leere Diagramm ein. Vergleiche anschließend mit dem vom Rechner erzeugten Verlauf und dem abgelesenen Maximalwert.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:100,F1pos:5,F1ang:90,q:0}},
+ {id:5,diff:1,typ:"check",topic:"Streckenlast",
+  title:"Gleichstreckenlast über die gesamte Länge",
+  text:"Balken L = 8 m, Auflager A (x = 0) und B (x = 8 m), Streckenlast q = 6 kN/m über die gesamte Länge sowie eine zusätzliche Randkraft F = 20 kN direkt über B. Ersetze die Streckenlast von Hand durch ihre Resultierende (Größe und Angriffspunkt) und berechne die Auflagerkräfte. Kontrolliere mit dem Rechner.",
+  preset:{ovlL:0,span:8,ovlR:0,nF:1,F1mag:20,F1pos:8,F1ang:90,q:6,qs:0,qLen:8}},
+ {id:6,diff:1,typ:"check",topic:"Streckenlast",
+  title:"Streckenlast über einen Teilbereich",
+  text:"Balken L = 10 m, Streckenlast q = 5 kN/m von x = 2 m bis x = 8 m. Bestimme von Hand die Resultierende der Teilstreckenlast (Größe und Lage) und anschließend die Auflagerkräfte. Kontrolliere dein Ergebnis mit dem Rechner.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:20,F1pos:0,F1ang:90,q:5,qs:2,qLen:6}},
+ {id:7,diff:1,typ:"solve",topic:"Schräger Balken",
+  title:"Einfluss der Balkenneigung auf N und Q",
+  text:"Lade das System (Balken 10 m, F = 100 kN senkrecht bei x = 5 m). Erhöhe die Neigung α schrittweise von 0° auf 20° und 40°. Beobachte, wie sich Normalkraft- und Querkraftverlauf verändern, obwohl die äußere Kraft gleich bleibt. Begründe dies mit der Zerlegung der Kraft in Komponenten längs und quer zur Balkenachse.",
+  preset:{alpha:20,ovlL:0,span:10,ovlR:0,nF:1,F1mag:100,F1pos:5,F1ang:90,q:0}},
+ {id:8,diff:2,typ:"check",topic:"Kragarm",
+  title:"Kragarm mit Einzellast am Kragende",
+  text:"Balken mit Kragarm links (3 m) und Feld A–B = 8 m (Gesamtlänge 11 m). Am linken Kragende (x = 0) wirkt F = 60 kN senkrecht. Berechne von Hand die Auflagerkräfte und skizziere den Momentenverlauf. Kontrolliere mit dem Rechner, insbesondere das Stützmoment über A.",
+  preset:{ovlL:3,span:8,ovlR:0,nF:1,F1mag:60,F1pos:0,F1ang:90,q:0}},
+ {id:9,diff:2,typ:"check",topic:"Auflagerreaktionen",
+  title:"Zwei Einzellasten unterschiedlicher Größe",
+  text:"Balken L = 12 m, zwei senkrechte Kräfte F1 = 90 kN bei x = 4 m und F2 = 50 kN bei x = 9 m. Berechne die Auflagerkräfte von Hand durch Superposition beider Einzellasten. Kontrolliere mit dem Rechner.",
+  preset:{ovlL:0,span:12,ovlR:0,nF:2,F1mag:90,F1pos:4,F1ang:90,F2mag:50,F2pos:9,F2ang:90,q:0}},
+ {id:10,diff:2,typ:"check",topic:"Schräger Balken",
+  title:"Geneigter Balken mit schräger Kraft",
+  text:"Geneigter Balken (α = 25°, L = 8 m). Bei x = 4 m wirkt eine Kraft F = 80 kN im Winkel von 60° zur Balkenachse. Zerlege die Kraft von Hand in eine Komponente längs und senkrecht zur Balkenachse und berechne die Auflagerkräfte. Kontrolliere Normalkraft-, Querkraft- und Momentenverlauf im Rechner.",
+  preset:{alpha:25,ovlL:0,span:8,ovlR:0,nF:1,F1mag:80,F1pos:4,F1ang:60,q:0}},
+ {id:11,diff:2,typ:"solve",topic:"Kombinierte Last",
+  title:"Streckenlast und Einzelkraft kombiniert",
+  text:"System: Streckenlast q = 4 kN/m über die gesamte Länge (10 m) sowie eine zusätzliche Einzelkraft F = 70 kN bei x = 7 m. Ermittle mit dem Rechner die Auflagerkräfte und das maximale Feldmoment. Rechne anschließend von Hand nach, um das Vorgehen bei kombinierter Belastung einzuüben.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:70,F1pos:7,F1ang:90,q:4,qs:0,qLen:10}},
+ {id:12,diff:2,typ:"solve",topic:"Kragarm",
+  title:"Beidseitiger Kragarm – Momente im Verhältnis",
+  text:"System mit beidseitigem Kragarm (je 2,5 m) und Kräften F1 = F2 = 50 kN an beiden Kragenden. Untersuche mit den Reglern „Überstand links/rechts”, wie sich Feldmoment und Kragarmmoment zueinander verhalten. Bei welchem Verhältnis von Kragarmlänge zu Feldlänge sind beide Momente etwa gleich groß?",
+  preset:{ovlL:2.5,span:9,ovlR:2.5,nF:2,F1mag:50,F1pos:0,F1ang:90,F2mag:50,F2pos:14,F2ang:90,q:0}},
+ {id:13,diff:2,typ:"check",topic:"Schnittgrößen",
+  title:"Nullstelle der Querkraft bei Streckenlast",
+  text:"Balken L = 10 m, Volllast q = 8 kN/m. Berechne von Hand die Stelle x₀, an der die Querkraft Q = 0 wird – dort liegt das maximale Feldmoment. Kontrolliere x₀ und den zugehörigen Momentenwert mit der Extremwert-Anzeige des Rechners.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:20,F1pos:0,F1ang:90,q:8,qs:0,qLen:10}},
+ {id:14,diff:2,typ:"solve",topic:"Auflagerreaktionen",
+  title:"Auflageranordnung optimieren",
+  text:"Lade das System (Balken mit Kragarm rechts, F = 80 kN bei x = 9 m). Verschiebe anschließend Auflager B über den Regler „Abstand A–B” (z. B. auf 6 m, 8 m, 14 m) und beobachte, wie sich das maximale Feldmoment und das Kragarmmoment rechts verändern. Welche Anordnung ergibt das kleinste maximale Moment?",
+  preset:{ovlL:0,span:10,ovlR:4,nF:1,F1mag:80,F1pos:9,F1ang:90,q:0}},
+ {id:15,diff:3,typ:"solve",topic:"Statisch unbestimmt",
+  title:"Statisch unbestimmtes System mit drei Auflagern",
+  text:"Balken L = 12 m mit drei Auflagern: A (fest, x = 0), C (Los, x = 6 m) und B (Los, x = 12 m). Lade das System in den Rechner, lies Auflagerkräfte und Momentenverlauf ab. Vergleiche gedanklich mit dem statisch bestimmten Balken ohne C. Diskutiere, warum das zusätzliche Auflager deutlich kleinere Momente bewirkt und weshalb die Gleichgewichtsbedingungen allein hier nicht mehr ausreichen.",
+  preset:{ovlL:0,span:12,ovlR:0,nSup:3,sC:6,nF:1,F1mag:80,F1pos:9,F1ang:90,q:0}},
+ {id:16,diff:3,typ:"solve",topic:"Statisch unbestimmt",
+  title:"Optimale Lage des Mittelauflagers",
+  text:"Durchlaufträger L = 14 m mit Volllast q = 6 kN/m, Auflager A und B an den Enden, Mittelauflager C zunächst bei x = 7 m. Verschiebe C mit dem Regler so, dass Feldmoment und Stützmoment über C betragsmäßig möglichst gleich groß werden. Nutze dazu die Extremwert-Anzeige unter dem Momentendiagramm.",
+  preset:{ovlL:0,span:14,ovlR:0,nSup:3,sC:7,nF:1,F1mag:20,F1pos:0,F1ang:90,q:6,qs:0,qLen:14}},
+ {id:17,diff:3,typ:"check",topic:"Komplettsystem",
+  title:"Geneigter Balken mit Kragarm, zwei schrägen Kräften und Streckenlast",
+  text:"Vollständiges System: geneigter Balken (α = 15°, L = 14 m) mit Kragarmen links/rechts (je 2 m), zwei schrägen Einzelkräften F1 = 90 kN bei x = 3 m (110° zum Balken) und F2 = 50 kN bei x = 13 m (70° zum Balken) sowie Streckenlast q = 4 kN/m von x = 2 m bis x = 12 m. Berechne von Hand die Auflagerkräfte sowie N, Q und M an mindestens drei charakteristischen Stellen (Auflager, Kragarmenden, unter den Kräften). Kontrolliere alle Werte mit dem Rechner (Ausdruck „Ausdruck Lösung”).",
+  preset:{alpha:15,ovlL:2,span:10,ovlR:2,nF:2,F1mag:90,F1pos:3,F1ang:110,F2mag:50,F2pos:13,F2ang:70,q:4,qs:2,qLen:10}},
+ {id:18,diff:3,typ:"solve",topic:"Dimensionierung",
+  title:"Grenzlast ermitteln",
+  text:"Für den Balken (L = 10 m, Kraft mittig bei x = 5 m) gilt ein zulässiges Biegemoment von M_zul = 180 kNm. Ermittle mit dem Regler „Betrag” von F, bis zu welcher Kraft F_max das System diese Grenze gerade noch einhält. Prüfe dein Ergebnis rechnerisch mit M_max = F·L/4 für die mittige Einzellast.",
+  preset:{ovlL:0,span:10,ovlR:0,nF:1,F1mag:100,F1pos:5,F1ang:90,q:0}},
+ {id:19,diff:3,typ:"check",topic:"Statisch unbestimmt",
+  title:"Statisch bestimmt vs. unbestimmt im Vergleich",
+  text:"Balken L = 12 m mit mittiger Kraft F = 80 kN. Lies zunächst mit zwei Auflagern (A, B) die Auflagerkräfte und M_max ab und notiere sie. Schalte danach auf drei Auflager um (zusätzliches Auflager C in Balkenmitte). Vergleiche A, B, C und M_max beider Varianten. Erläutere, weshalb ein zusätzliches Auflager die maximale Beanspruchung deutlich reduziert – und warum die Berechnung dafür nicht mehr allein mit den Gleichgewichtsbedingungen möglich ist.",
+  preset:{ovlL:0,span:12,ovlR:0,nSup:2,sC:6,nF:1,F1mag:80,F1pos:6,F1ang:90,q:0}},
+ {id:20,diff:3,typ:"check",topic:"Transferaufgabe",
+  title:"Vordach als Kragträger",
+  text:"Ein Vordach wird als Kragträger modelliert: kurze Einspannlänge A–B = 1 m direkt an der Wand, 2,5 m auskragender Bereich. Auf dem Kragarm wirken Eigengewicht und Schnee, vereinfacht als Streckenlast q = 2,5 kN/m, sowie am freien Ende eine Wartungslast F = 15 kN. Berechne von Hand das maximale Einspannmoment am Übergang zur Wand sowie die Querkraft dort. Kontrolliere deine Werte mit dem Rechner und beurteile, ob deine Handrechnung für die Bemessung der Befestigung ausreichend genau ist.",
+  preset:{ovlL:0,span:1,ovlR:2.5,nF:1,F1mag:15,F1pos:3.5,F1ang:90,q:2.5,qs:1,qLen:2.5}}
+];
+
+/* Fortschritt & Notizen: lokale Speicherung */
+const LS_PROG="balkenrechner_progress_v1", LS_NOTES="balkenrechner_notes_v1";
+function loadProgress(){ try{return JSON.parse(localStorage.getItem(LS_PROG))||{};}catch(e){return {};} }
+function loadNotes(){ try{return JSON.parse(localStorage.getItem(LS_NOTES))||{};}catch(e){return {};} }
+let progress=loadProgress(), notes=loadNotes();
+function saveProgress(){ try{localStorage.setItem(LS_PROG,JSON.stringify(progress));}catch(e){} }
+function saveNotes(){ try{localStorage.setItem(LS_NOTES,JSON.stringify(notes));}catch(e){} }
+function isDone(id){ return !!progress[id]; }
+function setDone(id,val){ progress[id]=val; saveProgress(); renderTasks(); renderProgress(); }
+function escapeHtml(s){ return String(s??"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+
+/* System in den Rechner laden (Aufgaben-Preset oder Zufallssystem) */
+function applyPreset(s){
+  IDS.forEach(id=>{ if(s[id]!==undefined) g(id).value=s[id]; });
+  g("tA").value=s.tA; g("tB").value=s.tB; g("tC").value=s.tC;
+  update();
+  g("accTasks").removeAttribute("open");
+  document.querySelector(".stage").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function loadPreset(task){ applyPreset(Object.assign({},TDEF,task.preset)); }
+
+/* ---- Zufallsaufgabe ---- */
+function randInt(min,max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function randChoice(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function randStep(min,max,step){ if(max<=min) return min; const n=Math.round((max-min)/step); return Math.round((min+randInt(0,n)*step)*10)/10; }
+function generateRandomSystem(){
+  const alpha=randChoice([0,0,0,0,10,15,20,25,30]);
+  const span=randStep(6,16,0.5);
+  const ovlL=randChoice([0,0,0,1,1.5,2,2.5,3]);
+  const ovlR=randChoice([0,0,0,1,1.5,2,2.5,3]);
+  const L=Math.round((ovlL+span+ovlR)*10)/10;
+  const nSup=randChoice([2,2,2,2,3]);
+  const sC=Math.round((L/2)*10)/10;
+  const nF=randChoice([1,1,2,2,3]);
+  const angles=[90,90,90,90,60,70,110,120];
+  const hasQ=Math.random()<0.5;
+  const q=hasQ?randStep(2,8,0.5):0;
+  const qLen=hasQ?randStep(Math.min(2,L),L,0.5):6;
+  const qs=hasQ?randStep(0,Math.max(0,L-qLen),0.5):0;
+  return {alpha,span,ovlL,ovlR,nSup,sC,tA:"fest",tB:"los",tC:"los",nF,
+    F1mag:randStep(30,140,5),F1pos:randStep(0,L,0.5),F1ang:randChoice(angles),
+    F2mag:randStep(20,90,5),F2pos:randStep(0,L,0.5),F2ang:randChoice(angles),
+    F3mag:randStep(20,90,5),F3pos:randStep(0,L,0.5),F3ang:randChoice(angles),
+    q,qs,qLen};
+}
+g("randomTaskBtn").addEventListener("click",()=>applyPreset(generateRandomSystem()));
+
+/* ---- Musterlösung: berechnet das Aufgaben-System unabhängig vom Rechnerstand ---- */
+function taskState(task){
+  const p=Object.assign({},TDEF,task.preset);
+  const L=Math.round((p.ovlL+p.span+p.ovlR)*10)/10;
+  return {alpha:p.alpha,span:p.span,ovlL:p.ovlL,ovlR:p.ovlR,L,
+    nSup:p.nSup,sC:p.sC,tA:p.tA,tB:p.tB,tC:p.tC,
+    nF:p.nF,F:[p.F1mag,p.F2mag,p.F3mag],Fs:[p.F1pos,p.F2pos,p.F3pos],Fa:[p.F1ang,p.F2ang,p.F3ang],
+    q:p.q,qs:p.qs,qLen:p.qLen};
+}
+function computeTaskSolution(task){
+  const m=model(taskState(task)), R=reactions(m);
+  if(!R) return null;
+  const data=sGrid(m).map(s=>{const v=internal(m,R,s); return {s,N:v.N,Q:v.Q,M:v.M};});
+  const extremes={};
+  ["N","Q","M"].forEach(k=>{
+    let best=data[0];
+    data.forEach(p=>{ if(Math.abs(p[k])>Math.abs(best[k])) best=p; });
+    extremes[k]=best;
+  });
+  return {R,extremes};
+}
+function renderSolutionChips(task){
+  const sol=computeTaskSolution(task);
+  if(!sol) return '<p class="note">Dieses System ist kinematisch verschieblich – keine Musterlösung möglich.</p>';
+  const parts=[];
+  sol.R.forEach(rr=>{
+    if(rr.type==="fest") parts.push(`<span class="chip"><b>${rr.name} waagrecht</b>${sgn(rr.Rx,1)} kN</span>`);
+    parts.push(`<span class="chip"><b>${rr.name} senkrecht</b>${sgn(rr.Ry,1)} kN</span>`);
+  });
+  [["N","kN",COL.green],["Q","kN",COL.blue],["M","kNm",COL.red]].forEach(([k,u,c])=>{
+    const p=sol.extremes[k];
+    parts.push(`<span class="chip"><b style="color:${c}">|${k}|<sub>max</sub></b>${num(Math.abs(p[k]),1)} ${u} `+
+      `<em style="color:var(--mut);font-style:normal">bei s = ${num(p.s,1)} m</em></span>`);
+  });
+  return `<div class="chips">${parts.join("")}</div>`+
+    `<p class="note" style="margin-top:10px">Vom Rechner mit den Angaben der Aufgabe berechnet.</p>`;
+}
+
+/* ---- Aufgaben rendern ---- */
+let taskDiffFilter=0, taskTypeFilter="alle";
+function renderTasks(){
+  const list=g("taskList"); list.textContent="";
+  const filtered=TASKS.filter(t=>(taskDiffFilter===0||t.diff===taskDiffFilter)&&(taskTypeFilter==="alle"||t.typ===taskTypeFilter));
+  const diffName=["","Leicht","Mittel","Schwer"];
+  filtered.forEach(t=>{
+    const done=isDone(t.id);
+    const typName=t.typ==="solve"?"Rechner zum Lösen":"Rechner zur Kontrolle";
+    const card=document.createElement("div"); card.className="task"+(done?" done":"");
+    card.innerHTML=`
+      <div class="thead">
+        <p class="ttitle"><span>Aufgabe ${t.id}</span>${t.title}</p>
+        <div class="badges">
+          <span class="badge d${t.diff}">${diffName[t.diff]}</span>
+          <span class="badge t${t.typ}">${typName}</span>
+        </div>
+      </div>
+      <p class="ttext">${t.text}</p>
+      <div class="noteBox">
+        <label for="note${t.id}">Eigene Notizen / Ergebnis</label>
+        <textarea class="noteArea" id="note${t.id}" data-id="${t.id}"
+          placeholder="z. B. berechnete Auflagerkräfte, Rechenweg, offene Fragen …">${escapeHtml(notes[t.id]||"")}</textarea>
+      </div>
+      <div class="tfoot">
+        <label class="tlabel"><input type="checkbox" ${done?"checked":""} data-id="${t.id}" class="doneBox">als gelöst markieren</label>
+        <button class="btn presetBtn" type="button" data-id="${t.id}">Einstellungen in den Rechner laden</button>
+      </div>`;
+    list.appendChild(card);
+  });
+  g("taskCount").textContent=TASKS.filter(t=>isDone(t.id)).length+"/"+TASKS.length;
+  list.querySelectorAll(".doneBox").forEach(cb=>cb.addEventListener("change",e=>setDone(parseInt(e.target.dataset.id),e.target.checked)));
+  list.querySelectorAll(".presetBtn").forEach(b=>b.addEventListener("click",()=>{
+    const t=TASKS.find(x=>x.id===parseInt(b.dataset.id)); if(t) loadPreset(t);
+  }));
+  list.querySelectorAll(".noteArea").forEach(ta=>ta.addEventListener("input",e=>{
+    notes[e.target.dataset.id]=e.target.value; saveNotes();
+  }));
+}
+g("diffFilter").addEventListener("click",e=>{
+  const b=e.target.closest(".fbtn"); if(!b) return;
+  taskDiffFilter=parseInt(b.dataset.d);
+  g("diffFilter").querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("on",x===b));
+  renderTasks();
+});
+g("typeFilter").addEventListener("click",e=>{
+  const b=e.target.closest(".fbtn"); if(!b) return;
+  taskTypeFilter=b.dataset.t;
+  g("typeFilter").querySelectorAll(".fbtn").forEach(x=>x.classList.toggle("on",x===b));
+  renderTasks();
+});
+
+/* ---- Fortschritt rendern ---- */
+function renderProgress(){
+  const body=g("progressBody"); body.textContent="";
+  const total=TASKS.length, done=TASKS.filter(t=>isDone(t.id)).length;
+  const pct=total?done/total:0;
+  const R=54, C=2*Math.PI*R;
+
+  const wrap=document.createElement("div"); wrap.className="progWrap";
+  const ring=document.createElementNS(NS,"svg");
+  ring.setAttribute("viewBox","0 0 150 150"); ring.setAttribute("width","150"); ring.setAttribute("height","150");
+  ring.innerHTML=
+    `<circle cx="75" cy="75" r="${R}" fill="none" stroke="${COL.line}" stroke-width="14"/>`+
+    `<circle cx="75" cy="75" r="${R}" fill="none" stroke="${COL.green}" stroke-width="14" stroke-linecap="round" `+
+      `stroke-dasharray="${(C*pct).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 75 75)"/>`+
+    `<text x="75" y="70" text-anchor="middle" font-size="26" font-weight="800" fill="${COL.ink}">${Math.round(pct*100)}%</text>`+
+    `<text x="75" y="90" text-anchor="middle" font-size="12" fill="${COL.mut}">${done} / ${total} gelöst</text>`;
+  wrap.appendChild(ring);
+
+  const bars=document.createElement("div"); bars.className="pbars";
+  [[1,"Leicht",COL.green],[2,"Mittel",COL.amber],[3,"Schwer",COL.reddk]].forEach(([d,name,col])=>{
+    const ts=TASKS.filter(t=>t.diff===d), dn=ts.filter(t=>isDone(t.id)).length;
+    const p=ts.length?dn/ts.length:0;
+    const row=document.createElement("div"); row.className="pbar";
+    row.innerHTML=`<div class="pl"><span>${name}</span><span>${dn} / ${ts.length}</span></div>`+
+      `<div class="ptrack"><div class="pfill" style="width:${(p*100).toFixed(0)}%;background:${col}"></div></div>`;
+    bars.appendChild(row);
+  });
+  wrap.appendChild(bars);
+  body.appendChild(wrap);
+
+  const grid=document.createElement("div"); grid.className="pgrid";
+  TASKS.forEach(t=>{
+    const d=isDone(t.id);
+    const dot=document.createElement("div"); dot.className="pdot";
+    dot.title="Aufgabe "+t.id+" · "+t.title+(d?" · gelöst":" · offen");
+    dot.style.background=d?COL.green:COL.line;
+    dot.style.color=d?"#fff":COL.mut;
+    dot.textContent=t.id;
+    grid.appendChild(dot);
+  });
+  body.appendChild(grid);
+}
+
+/* ================= Meine Lösungen (lokale Ablage, IndexedDB) ================= */
+const UP_DB="balkenrechnerUploads", UP_STORE="files";
+function openUploadsDB(){
+  return new Promise((resolve,reject)=>{
+    const req=indexedDB.open(UP_DB,1);
+    req.onupgradeneeded=()=>{
+      const db=req.result;
+      if(!db.objectStoreNames.contains(UP_STORE)){
+        const os=db.createObjectStore(UP_STORE,{keyPath:"id",autoIncrement:true});
+        os.createIndex("taskId","taskId",{unique:false});
+      }
+    };
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function addUpload(taskId,file){
+  const db=await openUploadsDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(UP_STORE,"readwrite");
+    tx.objectStore(UP_STORE).add({taskId,name:file.name||"Foto.jpg",type:file.type,blob:file,ts:Date.now()});
+    tx.oncomplete=()=>resolve(); tx.onerror=()=>reject(tx.error);
+  });
+}
+async function getUploads(taskId){
+  const db=await openUploadsDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(UP_STORE,"readonly");
+    const req=tx.objectStore(UP_STORE).index("taskId").getAll(taskId);
+    req.onsuccess=()=>resolve(req.result.sort((a,b)=>b.ts-a.ts));
+    req.onerror=()=>reject(req.error);
+  });
+}
+async function deleteUpload(id){
+  const db=await openUploadsDB();
+  return new Promise((resolve,reject)=>{
+    const tx=db.transaction(UP_STORE,"readwrite");
+    tx.objectStore(UP_STORE).delete(id);
+    tx.oncomplete=()=>resolve(); tx.onerror=()=>reject(tx.error);
+  });
+}
+
+const solTaskSel=g("solTask");
+TASKS.forEach(t=>{
+  const o=document.createElement("option"); o.value=t.id; o.textContent="Aufgabe "+t.id+" – "+t.title;
+  solTaskSel.appendChild(o);
+});
+function renderSolutionAnswer(taskId,hasImage){
+  const box=g("solAnswer"), task=TASKS.find(t=>t.id===taskId);
+  if(!task) return;
+  if(!hasImage){
+    box.className="solAnswer locked";
+    box.innerHTML='<p>Musterlösung gesperrt – lade zuerst ein Foto zu dieser Aufgabe hoch, um deine Lösung freizuschalten.</p>';
+    return;
+  }
+  box.className="solAnswer";
+  box.innerHTML="<h4>Musterlösung</h4>"+renderSolutionChips(task);
+}
+async function renderGallery(){
+  const taskId=parseInt(solTaskSel.value);
+  const gallery=g("solGallery"); gallery.textContent="";
+  let items=[];
+  try{ items=await getUploads(taskId); }catch(e){}
+  if(!items.length) gallery.innerHTML='<p class="empty">Noch keine Lösung zu dieser Aufgabe hochgeladen.</p>';
+  else items.forEach(it=>{
+    const url=URL.createObjectURL(it.blob), name=escapeHtml(it.name);
+    const div=document.createElement("div"); div.className="gitem";
+    if((it.type||"").startsWith("image/"))
+      div.innerHTML=`<img src="${url}" alt="${name}"><div class="gname">${name}</div><button type="button" class="gdel" data-id="${it.id}">×</button>`;
+    else
+      div.innerHTML=`<a class="gfile" href="${url}" target="_blank" rel="noopener">${name}</a><div class="gname">${name}</div><button type="button" class="gdel" data-id="${it.id}">×</button>`;
+    gallery.appendChild(div);
+  });
+  gallery.querySelectorAll(".gdel").forEach(b=>b.addEventListener("click",async()=>{
+    await deleteUpload(parseInt(b.dataset.id)); renderGallery();
+  }));
+  renderSolutionAnswer(taskId, items.some(it=>(it.type||"").startsWith("image/")));
+}
+solTaskSel.addEventListener("change",renderGallery);
+async function handleFiles(files){
+  const taskId=parseInt(solTaskSel.value);
+  for(const f of files) await addUpload(taskId,f);
+  renderGallery();
+}
+g("solPhoto").addEventListener("change",e=>{ const files=Array.from(e.target.files); e.target.value=""; handleFiles(files); });
+g("solFile").addEventListener("change",e=>{ const files=Array.from(e.target.files); e.target.value=""; handleFiles(files); });
+
+/* ---- Fortschritt exportieren / importieren ---- */
+function exportProgress(){
+  const data={version:1,exportedAt:new Date().toISOString(),progress,notes};
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement("a"); a.href=url; a.download="balkenrechner-fortschritt.json";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),2000);
+}
+function importProgressFile(file){
+  const reader=new FileReader();
+  reader.onload=()=>{
+    let data;
+    try{ data=JSON.parse(reader.result); }catch(e){ window.alert("Diese Datei ist kein gültiger Fortschritts-Export."); return; }
+    if(data && typeof data.progress==="object") Object.assign(progress,data.progress);
+    if(data && typeof data.notes==="object") Object.assign(notes,data.notes);
+    saveProgress(); saveNotes();
+    renderTasks(); renderProgress();
+    window.alert("Fortschritt wurde importiert.");
+  };
+  reader.readAsText(file);
+}
+g("exportProgress").addEventListener("click",exportProgress);
+g("importProgress").addEventListener("change",e=>{
+  const f=e.target.files[0]; e.target.value="";
+  if(f) importProgressFile(f);
+});
+
+renderTasks();
+renderProgress();
+renderGallery();
 </script>
 </body>
 </html>
