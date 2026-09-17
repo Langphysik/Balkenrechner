@@ -208,7 +208,7 @@
         <h3>Balken</h3>
         <div class="ctrl">
           <div class="row"><span class="name">Neigung α <small>· zur Waagrechten</small></span><span class="val" id="v_alpha"></span></div>
-          <input type="range" id="alpha" min="0" max="90" step="1" value="15">
+          <input type="range" id="alpha" min="0" max="90" step="1" value="0">
         </div>
         <div class="ctrl">
           <div class="row"><span class="name">Überstand links</span><span class="val" id="v_ovlL"></span></div>
@@ -454,7 +454,7 @@ const NS="http://www.w3.org/2000/svg";
 const COL={ink:"#1E293B",mut:"#64748B",line:"#E2E8F0",red:"#E24B4A",reddk:"#C0392B",
   green:"#137B5E",blue:"#2563EB",hatch:"#94A3B8",q:"#7C3AED",dash:"#B6BECB",amber:"#B45309"};
 const EA=2.1e6, EI=2.1e4;                    // kN, kNm²  (Stahlprofil)
-const DEF={alpha:15,span:10,ovlL:2,ovlR:2,nSup:2,sC:7,nF:2,
+const DEF={alpha:0,span:10,ovlL:2,ovlR:2,nSup:2,sC:7,nF:2,
   F1mag:100,F1pos:10,F1ang:120,F2mag:60,F2pos:6,F2ang:90,F3mag:40,F3pos:12,F3ang:90,
   q:5,qs:0,qLen:6};
 const SUBS=["\u2081","\u2082","\u2083"];
