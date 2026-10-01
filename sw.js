@@ -1,5 +1,5 @@
 /* Service Worker: App vollständig offline verfügbar halten */
-const CACHE = "balken-rechner-v7";
+const CACHE = "balken-rechner-v8";
 const FILES = [
   "./",
   "./index.html",
