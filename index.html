@@ -256,7 +256,7 @@
         <div class="fbox" id="fbox1">
           <h4 style="color:var(--red)">F₁</h4>
           <div class="ctrl"><div class="row"><span class="name">Betrag</span><span class="val" id="v_F1mag"></span></div>
-            <input type="range" id="F1mag" min="20" max="150" step="1" value="100"></div>
+            <input type="range" id="F1mag" min="0" max="100" step="1" value="100"></div>
           <div class="ctrl"><div class="row"><span class="name">Position</span><span class="val" id="v_F1pos"></span></div>
             <input type="range" id="F1pos" min="0" max="14" step="0.1" value="10">
             <div class="actions" style="padding:6px 0 0;gap:6px">
@@ -269,7 +269,7 @@
         <div class="fbox" id="fbox2">
           <h4 style="color:var(--red)">F₂</h4>
           <div class="ctrl"><div class="row"><span class="name">Betrag</span><span class="val" id="v_F2mag"></span></div>
-            <input type="range" id="F2mag" min="10" max="100" step="1" value="60"></div>
+            <input type="range" id="F2mag" min="0" max="100" step="1" value="60"></div>
           <div class="ctrl"><div class="row"><span class="name">Position</span><span class="val" id="v_F2pos"></span></div>
             <input type="range" id="F2pos" min="0" max="14" step="0.1" value="6">
             <div class="actions" style="padding:6px 0 0;gap:6px">
@@ -282,7 +282,7 @@
         <div class="fbox" id="fbox3">
           <h4 style="color:var(--red)">F₃</h4>
           <div class="ctrl"><div class="row"><span class="name">Betrag</span><span class="val" id="v_F3mag"></span></div>
-            <input type="range" id="F3mag" min="10" max="100" step="1" value="40"></div>
+            <input type="range" id="F3mag" min="0" max="100" step="1" value="40"></div>
           <div class="ctrl"><div class="row"><span class="name">Position</span><span class="val" id="v_F3pos"></span></div>
             <input type="range" id="F3pos" min="0" max="14" step="0.1" value="12">
             <div class="actions" style="padding:6px 0 0;gap:6px">
@@ -1277,7 +1277,7 @@ function generateRandomSystem(){
   const qLen=hasQ?randStep(Math.min(2,L),L,0.5):6;
   const qs=hasQ?randStep(0,Math.max(0,L-qLen),0.5):0;
   return {alpha,span,ovlL,ovlR,nSup,sC,tA:"fest",tB:"los",tC:"los",nF,
-    F1mag:randStep(30,140,5),F1pos:randStep(0,L,0.5),F1ang:randChoice(angles),
+    F1mag:randStep(30,100,5),F1pos:randStep(0,L,0.5),F1ang:randChoice(angles),
     F2mag:randStep(20,90,5),F2pos:randStep(0,L,0.5),F2ang:randChoice(angles),
     F3mag:randStep(20,90,5),F3pos:randStep(0,L,0.5),F3ang:randChoice(angles),
     q,qs,qLen};
